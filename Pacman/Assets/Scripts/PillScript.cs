@@ -24,7 +24,7 @@ public class PillScript : MonoBehaviour
 
     private void RemoveTile(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             Vector3Int cell = tilemap.WorldToCell(collision.transform.position);
             tilemap.SetTile(cell, null);

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: character_L
+  m_Name: Blinky_D
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,10 +20,10 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1975635887328401948, guid: aa22b6bd7211884469b8d2383552cc2f,
+      value: {fileID: -1981437635880020547, guid: aa22b6bd7211884469b8d2383552cc2f,
         type: 3}
     - time: 0.125
-      value: {fileID: 4367732871754573918, guid: aa22b6bd7211884469b8d2383552cc2f,
+      value: {fileID: -7365091535247084893, guid: aa22b6bd7211884469b8d2383552cc2f,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -44,8 +44,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -1975635887328401948, guid: aa22b6bd7211884469b8d2383552cc2f, type: 3}
-    - {fileID: 4367732871754573918, guid: aa22b6bd7211884469b8d2383552cc2f, type: 3}
+    - {fileID: -1981437635880020547, guid: aa22b6bd7211884469b8d2383552cc2f, type: 3}
+    - {fileID: -7365091535247084893, guid: aa22b6bd7211884469b8d2383552cc2f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

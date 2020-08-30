@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class PlayerController : MonoBehaviour
 
     public bool IsAlive;
 
-    public Animator animator;
+    private Animator animator;
 
     private bool mvHoz = false;
     private bool mvVer = false;
+
+    private Transform playerDirection;
 
 
     // Start is called before the first frame update
@@ -20,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
+        playerDirection = transform.GetChild(0);
         rb.gravityScale = 0.0f;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -27,30 +31,37 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (IsAlive)
         {
             float xPos = 0, yPos = 0;
-            if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
+
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            if (Mathf.Abs(horizontal) < 0.3f) horizontal = 0.0f;
+            if (Mathf.Abs(vertical) < 0.3f) vertical = 0.0f;
+
+            if (vertical != 0 && horizontal != 0)
             {
                 if (mvHoz)
                 {
-                    yPos = Input.GetAxis("Vertical");
+                    yPos = vertical;
                 }
                 else if (mvVer)
                 {
-                    xPos = Input.GetAxis("Horizontal");
+                    xPos = horizontal;
                 }
             }
             else
             {
-                mvHoz = Input.GetAxis("Horizontal") != 0;
-                xPos = Input.GetAxis("Horizontal");
-                mvVer = Input.GetAxis("Vertical") != 0;
-                yPos = Input.GetAxis("Vertical");
-            }
 
+                mvHoz = horizontal != 0;
+                xPos = horizontal;
+                mvVer = vertical != 0;
+                yPos = vertical;
+            }
 
             if (xPos > 0
                 && !Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.0f, 0.0f), Vector2.right, 0.5f)
@@ -58,13 +69,14 @@ public class PlayerController : MonoBehaviour
                 && !Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.25f, 0.0f), Vector2.right, 0.5f))
             {
                 moveDirection = Vector3.right;
+                
             }
             else if (xPos < 0
                 && !Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.0f, 0.0f), Vector2.left, 0.5f)
                 && !Physics2D.Raycast(transform.position - new Vector3(0.5f, -0.25f, 0.0f), Vector2.left, 0.5f)
                 && !Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.25f, 0.0f), Vector2.left, 0.5f))
             {
-                moveDirection = Vector3.right * -1;
+                moveDirection = Vector3.left;
             }
             else if (yPos > 0
                 && !Physics2D.Raycast(transform.position + new Vector3(0.0f, 0.5f, 0.0f), Vector2.up, 0.5f)
@@ -78,17 +90,29 @@ public class PlayerController : MonoBehaviour
                 && !Physics2D.Raycast(transform.position - new Vector3(0.25f, 0.5f, 0.0f), Vector2.down, 0.5f)
                 && !Physics2D.Raycast(transform.position - new Vector3(-0.25f, 0.5f, 0.0f), Vector2.down, 0.5f))
             {
-                moveDirection = Vector3.up * -1;
+                moveDirection = Vector3.down;
             }
 
-            rb.velocity = moveDirection * 10;
-            animator.SetBool("IsAlive", IsAlive);
+            playerDirection.forward = moveDirection;
+
+            rb.velocity = moveDirection * 400 * Time.fixedDeltaTime;
+
             animator.SetFloat("XSpeed", moveDirection.x);
             animator.SetFloat("YSpeed", moveDirection.y);
         }
         else
         {
             rb.velocity = Vector3.zero;
+        }
+        animator.SetBool("IsAlive", IsAlive);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            IsAlive = false;
+            rb.simulated = false;
         }
     }
 
