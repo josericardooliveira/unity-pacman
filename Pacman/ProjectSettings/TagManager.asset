@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Walls
+  - GameState
+  - GhostHome
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - Block
   - Door
   - Enemy
-  - 
-  - 
+  - Ghost
+  - Player
   - 
   - 
   - 

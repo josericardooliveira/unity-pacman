@@ -13,6 +13,9 @@ public class GhostController : MonoBehaviour
     [SerializeField]
     private float nextWayPointDistance = 0f;
 
+    [SerializeField]
+    private GameState gameState;
+
     private Path path;
 
     private int currentWayPoint = 0;
@@ -21,7 +24,7 @@ public class GhostController : MonoBehaviour
 
     private Seeker seeker;
 
-    private bool IsAlive;
+    public bool IsAlive;
 
     private Animator animator;
 
@@ -34,6 +37,10 @@ public class GhostController : MonoBehaviour
         rb.gravityScale = 0.0f;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         Physics2D.IgnoreLayerCollision(10, 9);
+        Physics2D.IgnoreLayerCollision(10, 10);
+        Physics2D.IgnoreLayerCollision(10, 11);
+        Physics2D.IgnoreLayerCollision(11, 11);
+        Physics2D.IgnoreLayerCollision(11, 9);
         IsAlive = true;
         InvokeRepeating("UpdatePath", 0, 0.5f);
     }
@@ -60,7 +67,8 @@ public class GhostController : MonoBehaviour
     {
         if (seeker.IsDone())
         {
-            seeker.StartPath(rb.position, playerTransform.position, OnPathComplete);
+            var targetPosition = IsAlive ? playerTransform.position : homeTransform.position;
+            seeker.StartPath(rb.position, targetPosition, OnPathComplete);
         }
 
     }
@@ -97,5 +105,18 @@ public class GhostController : MonoBehaviour
         animator.SetBool("IsAlive", IsAlive);
         animator.SetFloat("XSpeed", moveDirection.x);
         animator.SetFloat("YSpeed", moveDirection.y);
+        animator.SetInteger("DangerLevel", gameState.isInvencible ? 2 : 0);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && gameState.isInvencible)
+        {
+            IsAlive = false;
+            gameObject.layer = 11;
+            gameState.score += 200;
+        }
+    }
+
+
 }

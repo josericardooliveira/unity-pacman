@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     private Transform playerDirection;
 
+    [SerializeField]
+    private GameState gameState;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
         playerDirection = transform.GetChild(0);
         rb.gravityScale = 0.0f;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
+        Physics2D.IgnoreLayerCollision(12, 11);
         IsAlive = true;
     }
 
@@ -56,7 +58,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-
                 mvHoz = horizontal != 0;
                 xPos = horizontal;
                 mvVer = vertical != 0;
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if(collision.gameObject.CompareTag("Enemy") && !gameState.isInvencible)
         {
             IsAlive = false;
             rb.simulated = false;

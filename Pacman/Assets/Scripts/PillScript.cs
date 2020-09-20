@@ -7,6 +7,11 @@ public class PillScript : MonoBehaviour
 {
     private Tilemap tilemap;
 
+    public bool IsPowerUp;
+
+    [SerializeField]
+    private GameState gameState;
+
     private void Start()
     {
         tilemap = GetComponent<Tilemap>();
@@ -27,6 +32,20 @@ public class PillScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Vector3Int cell = tilemap.WorldToCell(collision.transform.position);
+            var tile = tilemap.GetTile(cell);
+
+            if (tile != null)
+            {
+                if (IsPowerUp)
+                {
+                    gameState.isInvencible = true;
+                }
+                else
+                {
+                    gameState.score += 50;
+                }
+            }
+
             tilemap.SetTile(cell, null);
         }
     }
