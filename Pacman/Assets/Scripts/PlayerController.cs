@@ -3,7 +3,7 @@
 public class PlayerController : MonoBehaviour
 {
 
-    private Vector3 moveDirection = Vector3.right * -1;
+    private Vector3 moveDirection = Vector3.left;
 
     private Rigidbody2D rb;
 
@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(horizontal) < 0.3f) horizontal = 0.0f;
             if (Mathf.Abs(vertical) < 0.3f) vertical = 0.0f;
 
+            LayerMask mask = 1 << LayerMask.NameToLayer("Block") | 1 << LayerMask.NameToLayer("Door");
+
             if (vertical != 0 && horizontal != 0)
             {
                 if (mvHoz)
@@ -65,31 +67,31 @@ public class PlayerController : MonoBehaviour
             }
 
             if (xPos > 0
-                && !Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.0f, 0.0f), Vector2.right, 0.5f)
-                && !Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.25f, 0.0f), Vector2.right, 0.5f)
-                && !Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.25f, 0.0f), Vector2.right, 0.5f))
+                && !Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.0f, 0.0f), Vector2.right, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position + new Vector3(0.5f, -0.25f, 0.0f), Vector2.right, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position + new Vector3(0.5f, 0.25f, 0.0f), Vector2.right, 0.5f, mask))
             {
                 moveDirection = Vector3.right;
                 
             }
             else if (xPos < 0
-                && !Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.0f, 0.0f), Vector2.left, 0.5f)
-                && !Physics2D.Raycast(transform.position - new Vector3(0.5f, -0.25f, 0.0f), Vector2.left, 0.5f)
-                && !Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.25f, 0.0f), Vector2.left, 0.5f))
+                && !Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.0f, 0.0f), Vector2.left, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position - new Vector3(0.5f, -0.25f, 0.0f), Vector2.left, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.25f, 0.0f), Vector2.left, 0.5f, mask))
             {
                 moveDirection = Vector3.left;
             }
             else if (yPos > 0
-                && !Physics2D.Raycast(transform.position + new Vector3(0.0f, 0.5f, 0.0f), Vector2.up, 0.5f)
-                && !Physics2D.Raycast(transform.position + new Vector3(0.25f, 0.5f, 0.0f), Vector2.up, 0.5f)
-                && !Physics2D.Raycast(transform.position + new Vector3(-0.25f, 0.5f, 0.0f), Vector2.up, 0.5f))
+                && !Physics2D.Raycast(transform.position + new Vector3(0.0f, 0.5f, 0.0f), Vector2.up, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position + new Vector3(0.25f, 0.5f, 0.0f), Vector2.up, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position + new Vector3(-0.25f, 0.5f, 0.0f), Vector2.up, 0.5f, mask))
             {
                 moveDirection = Vector3.up;
             }
             else if (yPos < 0
-                && !Physics2D.Raycast(transform.position - new Vector3(0.0f, 0.5f, 0.0f), Vector2.down, 0.5f)
-                && !Physics2D.Raycast(transform.position - new Vector3(0.25f, 0.5f, 0.0f), Vector2.down, 0.5f)
-                && !Physics2D.Raycast(transform.position - new Vector3(-0.25f, 0.5f, 0.0f), Vector2.down, 0.5f))
+                && !Physics2D.Raycast(transform.position - new Vector3(0.0f, 0.5f, 0.0f), Vector2.down, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position - new Vector3(0.25f, 0.5f, 0.0f), Vector2.down, 0.5f, mask)
+                && !Physics2D.Raycast(transform.position - new Vector3(-0.25f, 0.5f, 0.0f), Vector2.down, 0.5f, mask))
             {
                 moveDirection = Vector3.down;
             }
@@ -104,6 +106,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
+            if(Input.GetButtonDown("Restart"))
+            {
+                gameState.Restart();
+            }
         }
         animator.SetBool("IsAlive", IsAlive);
     }
@@ -117,4 +123,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void GiveLife()
+    {
+        IsAlive = true;
+        rb.simulated = true;
+        moveDirection = Vector3.left;
+    }
 }

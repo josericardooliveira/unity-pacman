@@ -337,7 +337,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blinky_U
+  m_Name: Iinky_U
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -350,7 +350,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8f67ba359df22e34789df75a8750eecb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7676b47d40411134898e0365c3b8588a, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -505,7 +505,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blinky_D
+  m_Name: Inky_D
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -518,7 +518,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a9224ef291f06af4fb0ba13968166329, type: 2}
+  m_Motion: {fileID: 7400000, guid: ace7bf0a2c564f2469768d0f0e4ad7b6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -531,7 +531,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blinky_R
+  m_Name: Inky_R
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -544,7 +544,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 00addcaa24c1d614d8fda70885f1fdbc, type: 2}
+  m_Motion: {fileID: 7400000, guid: 0163b31fc5d41c340a56369859228be3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -646,7 +646,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blinky_Animation
+  m_Name: Inky_Animation
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: XSpeed
@@ -922,7 +922,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blinky_L
+  m_Name: Iinky_L
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -935,7 +935,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a738d741406294f42bc72443b75760b2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 73e26c07d1b000b41ad4cd0e7229c494, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

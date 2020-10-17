@@ -8,8 +8,8 @@ public class GhostHome : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             GhostController controller = col.gameObject.GetComponent<GhostController>();
-            controller.IsAlive = true;
-            col.gameObject.layer = 10;
+            controller.aiState = GhostAIState.SCATTER;
+            col.gameObject.layer = 13;
         }
     }
 
