@@ -218,5 +218,10 @@ public class GhostController : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        lastDirection = Vector2.zero;
+    }
+
 
 }

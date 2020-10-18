@@ -84,6 +84,7 @@ public class GameState : MonoBehaviour
         foreach (GhostController ghost in ghosts)
         {
             ghost.gameObject.transform.position = GhostHomeTransform.position;
+            ghost.Reset();
         }
 
         var players = FindObjectsOfType<PlayerController>();
